@@ -12,9 +12,9 @@
 </head>
 <body>
     <h2>2. ConstraintValidator유형 유효성 검사</h2>
-    <form th:object="${member2}" action="/exam09_01" method="post">
-        <p>ID: <input type="text" th:field="*{memberId}"><span th:erroes="*{memberId}"></span></p>
-        <p>PWD: <input type="text" th:field="*{passwd}"><span th:erroes="*{passwd}"></span></p>
+    <form th:object="${member2}" action="/exam09_02" method="post">
+        <p>ID: <input type="text" th:field="*{memberId}"><span th:errors="*{memberId}"></span></p>
+        <p>PWD: <input type="text" th:field="*{passwd}"><span th:errors="*{passwd}"></span></p>
         <p>
             <button type="submit">확인</button>&nbsp;&nbsp;
             <button type="reset">취소</button>

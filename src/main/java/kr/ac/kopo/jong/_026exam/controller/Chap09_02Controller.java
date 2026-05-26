@@ -21,7 +21,7 @@ public class Chap09_02Controller {
     }
 
     @PostMapping
-    public String submitForm(@Valid @ModelAttribute Product product, BindingResult bindingResult){
+    public String submitForm(@Valid @ModelAttribute("member2") Member2 member2, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "viewPage09_02";
         }
