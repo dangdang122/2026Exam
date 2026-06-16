@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,13 +20,22 @@ public class SecurityConfiguration {
     // 특정 URI에 접근할 수 있는 접근 권한 설정
     @Bean
     SecurityFilterChain examMethod01(HttpSecurity http){
-        http.authorizeHttpRequests(
+        http
+                .csrf(AbstractHttpConfigurer::disable)//csrf 비활성화
+                .authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers("/member/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
-        ).formLogin(Customizer.withDefaults());
+        ).formLogin(formLogin -> formLogin
+                        .loginPage("/exam05")
+                        .loginProcessingUrl("/exam05")
+                        .defaultSuccessUrl("/admin")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .failureUrl("/loginfailed")
+                );
 
         return http.build();
     }
