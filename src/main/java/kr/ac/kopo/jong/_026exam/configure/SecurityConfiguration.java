@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
+    // 특정 URI에 접근할 수 있는 접근 권한 설정
     @Bean
     SecurityFilterChain examMethod01(HttpSecurity http){
         http.authorizeHttpRequests(
